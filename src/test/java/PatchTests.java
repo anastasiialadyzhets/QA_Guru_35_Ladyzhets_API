@@ -1,4 +1,6 @@
+import io.restassured.RestAssured;
 import jdk.jfr.Description;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
@@ -9,6 +11,11 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 public class PatchTests {
     private final String userPatchSchema = "patchUserResponse-schema.json";
+    @BeforeAll
+    static void setupConfiguration(){
+        RestAssured.baseURI = "https://reqres.in";
+        RestAssured.basePath = "/api";
+    }
     @Test
     @Description("Обновление основных полей")
     void successfulPatchFullTest() {
@@ -22,7 +29,7 @@ public class PatchTests {
                 .log().uri()
 
                 .when()
-                .patch("https://reqres.in/api/user/"+userId)
+                .patch("/user/"+userId)
 
                 .then()
                 .log().status()
@@ -44,7 +51,7 @@ public class PatchTests {
                 .log().uri()
 
                 .when()
-                .patch("https://reqres.in/api/user/"+userId)
+                .patch("/user/"+userId)
 
                 .then()
                 .log().status()
@@ -65,7 +72,7 @@ public class PatchTests {
                 .log().uri()
 
                 .when()
-                .patch("https://reqres.in/api/user/"+userId)
+                .patch("/user/"+userId)
 
                 .then()
                 .log().status()
@@ -87,7 +94,7 @@ public class PatchTests {
                 .log().uri()
 
                 .when()
-                .patch("https://reqres.in/api/user/"+userId)
+                .patch("/user/"+userId)
 
                 .then()
                 .log().status()

@@ -1,11 +1,21 @@
+import io.restassured.RestAssured;
 import jdk.jfr.Description;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.is;
+
 public class CreateTests {
+    @BeforeAll
+    static void setupConfiguration(){
+        RestAssured.baseURI = "https://reqres.in";
+        RestAssured.basePath = "/api";
+    }
+
     private final String userCreateSchema = "createUserResponse-schema.json";
     @Test
     @Description("Успешное создание пользователя со всеми полями")
@@ -19,7 +29,7 @@ public class CreateTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/user")
+                .post("/user")
 
                 .then()
                 .log().status()
@@ -41,7 +51,7 @@ public class CreateTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/user")
+                .post("/user")
 
                 .then()
                 .log().status()
@@ -62,7 +72,7 @@ public class CreateTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/user")
+                .post("/user")
 
                 .then()
                 .log().status()

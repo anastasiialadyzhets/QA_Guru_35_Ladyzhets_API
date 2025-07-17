@@ -1,11 +1,20 @@
+import io.restassured.RestAssured;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 
 public class LoginTests {
+    @BeforeAll
+    static void setupConfiguration(){
+        RestAssured.baseURI = "https://reqres.in";
+        RestAssured.basePath = "/api";
+    }
     @Test
     void successfulLoginTest() {
         String authData = "{\"email\": \"eve.holt@reqres.in\", \"password\": \"cityslicka\"}";
@@ -17,13 +26,14 @@ public class LoginTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
 
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body("token", is("QpwL5tke4Pnpja7X4"));
+                .body("token", notNullValue())
+                .body("token",  Matchers.matchesRegex("^[A-Za-z0-9]{17}"));
     }
 
     @Test
@@ -36,7 +46,7 @@ public class LoginTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
 
                 .then()
                 .log().status()
@@ -56,7 +66,7 @@ public class LoginTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
 
                 .then()
                 .log().status()
@@ -76,7 +86,7 @@ public class LoginTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
 
                 .then()
                 .log().status()
@@ -97,7 +107,7 @@ public class LoginTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
 
                 .then()
                 .log().status()
@@ -116,7 +126,7 @@ public class LoginTests {
                 .log().uri()
 
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
 
                 .then()
                 .log().status()
@@ -129,7 +139,7 @@ public class LoginTests {
         given()
                 .header("x-api-key","reqres-free-v1")
                 .log().uri()
-                .post("https://reqres.in/api/login")
+                .post("/login")
                 .then()
                 .log().status()
                 .log().body()

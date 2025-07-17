@@ -1,6 +1,8 @@
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import io.restassured.RestAssured;
 import jdk.jfr.Description;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -12,7 +14,11 @@ public class GetSingleTest {
     private final  int userIdExist=2;
     private final  int userIdNotFound=23;
     private static final Gson gson = new Gson();
-
+    @BeforeAll
+    static void setupConfiguration(){
+        RestAssured.baseURI = "https://reqres.in";
+        RestAssured.basePath = "/api";
+    }
     @Test
     @Description("Запрос существующего пользователя")
     void successfulGetSingleUserTest() {
@@ -29,7 +35,7 @@ public class GetSingleTest {
                 .log().uri()
 
                 .when()
-                .get("https://reqres.in/api/user/"+userIdExist)
+                .get("/user/"+userIdExist)
 
                 .then()
                 .log().status()
@@ -51,7 +57,7 @@ public class GetSingleTest {
                 .log().uri()
 
                 .when()
-                .get("https://reqres.in/api/user/"+userIdNotFound)
+                .get("/api/user/"+userIdNotFound)
 
                 .then()
                 .log().status()
