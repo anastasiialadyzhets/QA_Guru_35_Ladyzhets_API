@@ -1,4 +1,7 @@
+package apiTests;
+
 import io.restassured.RestAssured;
+import apiTests.lombok.CreateRequestModel;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -8,6 +11,8 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.is;
+import static io.qameta.allure.Allure.step;
+
 
 public class CreateTests {
     @BeforeAll
@@ -20,9 +25,12 @@ public class CreateTests {
     @Test
     @Description("Успешное создание пользователя со всеми полями")
     void successfulCreateTest(){
-        String requestData = "{\"name\": \"morpheus\", \"job\": \"leader\"}";
+        CreateRequestModel requestData = new CreateRequestModel();
+        requestData.setName("morpheus");
+        requestData.setJob("leader");
 
-        given()
+        step("Создать пользователя со всеми полями", () -> {
+            given()
                 .body(requestData)
                 .header("x-api-key","reqres-free-v1")
                 .contentType(JSON)
@@ -38,34 +46,44 @@ public class CreateTests {
                 .body(matchesJsonSchemaInClasspath(userCreateSchema))
                 .body("name", is("morpheus"))
                 .body("job", is("leader"));
+        });
     }
     @Test
     @Description("Успешное создание пользователя с пустыми полями")
     void successfulEmptyCreateTest() {
         String requestData = "{}";
 
-        given()
-                .body(requestData)
-                .header("x-api-key","reqres-free-v1")
-                .contentType(JSON)
-                .log().uri()
+        step("Создать пользователя с пустыми полями", () -> {
+            given()
+                    .body(requestData)
+                    .header("x-api-key", "reqres-free-v1")
+                    .contentType(JSON)
+                    .log().uri()
 
-                .when()
-                .post("/user")
+                    .when()
+                    .post("/user")
 
-                .then()
-                .log().status()
-                .log().body()
-                .statusCode(201)
-                .body(matchesJsonSchemaInClasspath(userCreateSchema));
+                    .then()
+                    .log().status()
+                    .log().body()
+                    .statusCode(201)
+                    .body(matchesJsonSchemaInClasspath(userCreateSchema));
+        });
     }
 
     @Test
     @Description("Успешное создание пользователя со случайными полями")
     void successfulCreateCustomParametersTest() {
-        String requestData = "{\"id\": \"kvakva\", \"id2\": \"kvakva2\", \"id3\": \"kvakva3\", \"id4\": \"kvakva4\", \"id5\": \"kvakva5\"}";
+        CreateRequestModel requestData = new CreateRequestModel();
 
-        given()
+        requestData.setId("kvakva");
+        requestData.setId2("kvakva2");
+        requestData.setId3("kvakva3");
+        requestData.setId4("kvakva4");
+        requestData.setId5("kvakva5");
+
+        step("Создать пользователя со случайными полями", () -> {
+            given()
                 .body(requestData)
                 .header("x-api-key","reqres-free-v1")
                 .contentType(JSON)
@@ -79,5 +97,6 @@ public class CreateTests {
                 .log().body()
                 .statusCode(201)
                 .body(matchesJsonSchemaInClasspath(userCreateSchema));
+        });
     }
 }

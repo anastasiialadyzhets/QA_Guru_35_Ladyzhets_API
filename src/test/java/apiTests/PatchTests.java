@@ -1,3 +1,6 @@
+package apiTests;
+
+import apiTests.lombok.CreateRequestModel;
 import io.restassured.RestAssured;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,8 +22,10 @@ public class PatchTests {
     @Test
     @Description("Обновление основных полей")
     void successfulPatchFullTest() {
-        String requestData = "{\"name\": \"morpheus\", \"job\": \"zion resident\"}";//, \"id3\": \"kvakva3\", \"id4\": \"kvakva4\", \"id5\": \"kvakva5\"}";
         int userId= new Random().nextInt(0,101);
+        CreateRequestModel requestData = new CreateRequestModel();
+        requestData.setName("morpheus");
+        requestData.setJob("zion resident");
 
         given()
                 .body(requestData)
@@ -41,8 +46,9 @@ public class PatchTests {
     @Test
     @Description("Обновление только поля Job")
     void successfulPatchOnlyJobFieldTest() {
-        String requestData = "{\"job\": \"zion residentkva\"}";
         int userId= new Random().nextInt(0,101);
+        CreateRequestModel requestData = new CreateRequestModel();
+        requestData.setJob("zion resident");
 
         given()
                 .body(requestData)
@@ -62,8 +68,9 @@ public class PatchTests {
     @Test
     @Description("Обновление только поля Name")
     void successfulPatchOnlyNameFieldTest() {
-        String requestData = "{\"name\": \"morpheuskva\"}";
         int userId= new Random().nextInt(0,101);
+        CreateRequestModel requestData = new CreateRequestModel();
+        requestData.setName("morpheus");
 
         given()
                 .body(requestData)
@@ -84,8 +91,11 @@ public class PatchTests {
     @Test
     @Description("Обновление случайных полей")
     void successfulPatchCustomFieldsTest() {
-        String requestData = "{\"id3\": \"kvakva3\", \"id4\": \"kvakva4\", \"id5\": \"kvakva5\"}";
         int userId= new Random().nextInt(0,101);
+        CreateRequestModel requestData = new CreateRequestModel();
+        requestData.setId3("kvakva3");
+        requestData.setId4("kvakva4");
+        requestData.setId5("kvakva5");
 
         given()
                 .body(requestData)
