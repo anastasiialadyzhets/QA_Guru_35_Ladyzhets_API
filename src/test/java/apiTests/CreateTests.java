@@ -31,7 +31,7 @@ public class CreateTests {
     @Description("Успешное создание пользователя со всеми полями")
     void successfulCreateTest(){
         Allure.label("epic","tetest1");
-        Allure.label("feature","test|asas|asdsdsd");
+        Allure.label("feature","test/asas/asdsdsd");
         CreateRequestModel requestData = new CreateRequestModel();
         requestData.setName("morpheus");
         requestData.setJob("leader");
