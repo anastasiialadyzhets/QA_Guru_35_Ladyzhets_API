@@ -1,5 +1,8 @@
 package apiTests;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.AllureId;
+import io.qameta.allure.Link;
 import io.restassured.RestAssured;
 import apiTests.lombok.CreateRequestModel;
 import jdk.jfr.Description;
@@ -12,6 +15,8 @@ import static io.restassured.http.ContentType.JSON;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.is;
 import static io.qameta.allure.Allure.step;
+import static io.qameta.allure.Allure.label;
+
 
 
 public class CreateTests {
@@ -25,6 +30,8 @@ public class CreateTests {
     @Test
     @Description("Успешное создание пользователя со всеми полями")
     void successfulCreateTest(){
+        Allure.label("epic","tetest1");
+        Allure.label("feature","test|asas|asdsdsd");
         CreateRequestModel requestData = new CreateRequestModel();
         requestData.setName("morpheus");
         requestData.setJob("leader");
