@@ -2,6 +2,7 @@ package apiTests;
 
 import apiTests.lombok.SingleUserResponseModel;
 import com.google.gson.Gson;
+import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,6 +24,9 @@ public class GetSingleTest {
     @Test
     @Description("Запрос существующего пользователя")
     void successfulGetSingleUserTest() {
+        Allure.label("epic","tetest1");
+        Allure.label("feature","test/asas/asdsdsd");
+
         SingleUserResponseModel expectedUser = new SingleUserResponseModel();
         SingleUserResponseModel.Data responseDataPath=new SingleUserResponseModel.Data();
         SingleUserResponseModel.Support responseSupportPath=new SingleUserResponseModel.Support();

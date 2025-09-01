@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 import static io.qameta.allure.Allure.step;
 
 public class CreateTests {
-    @BeforeEach
+    //@BeforeEach
     public void setLabels(){
         Allure.label("epic","tetest1");
         Allure.label("feature","test/asas/asdsdsd");
@@ -31,6 +31,8 @@ public class CreateTests {
     @Test
     @Description("Успешное создание пользователя со всеми полями")
     void successfulCreateTest(){
+        Allure.label("epic","tetest1");
+        Allure.label("feature","test/asas/asdsdsd");
         CreateRequestModel requestData = new CreateRequestModel();
         requestData.setName("morpheus");
         requestData.setJob("leader");
