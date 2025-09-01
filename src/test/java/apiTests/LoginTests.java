@@ -1,6 +1,7 @@
 package apiTests;
 
 import apiTests.lombok.LoginResponseModel;
+import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import apiTests.lombok.LoginRequestModel;
 
@@ -19,6 +20,7 @@ public class LoginTests {
     static void setupConfiguration(){
         RestAssured.baseURI = "https://reqres.in";
         RestAssured.basePath = "/api";
+        Allure.label("feature","test/asas3/asdsdsd4");
     }
     @Test
     void successfulLoginTest() {
