@@ -2,6 +2,7 @@ package apiTests.wSpec;
 
 import apiTests.lombok.LoginRequestModel;
 import apiTests.lombok.LoginResponseModel;
+import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,6 +21,8 @@ public class LoginWSpecTests {
     }
     @Test
     void successfulLoginTest() {
+        Allure.label("epic","tetest777");
+        Allure.label("feature","test/asas/asdsdsd777");
         LoginRequestModel authData = new LoginRequestModel();
         authData.setEmail("eve.holt@reqres.in");
         authData.setPassword("cityslicka");
