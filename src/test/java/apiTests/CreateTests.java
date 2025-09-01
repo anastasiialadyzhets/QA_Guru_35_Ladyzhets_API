@@ -1,9 +1,11 @@
 package apiTests;
 
+import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import apiTests.lombok.CreateRequestModel;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -14,6 +16,11 @@ import static org.hamcrest.Matchers.is;
 import static io.qameta.allure.Allure.step;
 
 public class CreateTests {
+    @BeforeEach
+    static void setLabels(){
+        Allure.label("epic","tetest1");
+        Allure.label("feature","test/asas/asdsdsd");
+    }
     @BeforeAll
     static void setupConfiguration(){
         RestAssured.baseURI = "https://reqres.in";
