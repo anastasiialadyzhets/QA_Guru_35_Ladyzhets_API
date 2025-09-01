@@ -24,8 +24,8 @@ public class GetSingleTest {
     @Test
     @Description("Запрос существующего пользователя")
     void successfulGetSingleUserTest() {
-        Allure.label("epic","tetest1");
-        Allure.label("feature","test/asas/asdsdsd");
+        Allure.label("epic","tetest5");
+        Allure.label("feature","test/asa5s/asdsds5d");
 
         SingleUserResponseModel expectedUser = new SingleUserResponseModel();
         SingleUserResponseModel.Data responseDataPath=new SingleUserResponseModel.Data();
