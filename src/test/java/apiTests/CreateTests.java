@@ -17,7 +17,7 @@ import static io.qameta.allure.Allure.step;
 
 public class CreateTests {
     @BeforeEach
-    static void setLabels(){
+    public void setLabels(){
         Allure.label("epic","tetest1");
         Allure.label("feature","test/asas/asdsdsd");
     }
